@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Watch</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <script onload="start()"></script>
+    <div id="bmain">
+        <h1>stopwatch</h1>
+        <h2>vanilla js</h2>
+        <p id="time"><span id="box"><span id="mins">00</span>:<span id="sec">00</span>:<span id="tens">00</span></span></p>
+        <div id="buttons">
+            <div id="row1">
+                <div id="buttonSpace">
+                    <button id="start">start</button>
+                </div>
+                <div id="buttonSpace">
+                    <button id="stop">stop</button>
+                </div>            
+            </div>
+            <div id="row2">
+                <div id="buttonSpace">
+                    <button id="reset">reset</button>
+                </div>
+                <div id="buttonSpace">
+                    <button id="lap">lap</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="laps">
+        <div>
+        </div>
+    </div>
+    <script type="text/Javascript" src="script.js" defer></script>
+</body>
+</html>

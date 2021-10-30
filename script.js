@@ -29,12 +29,14 @@
         interval = setInterval(startTimer, 10);
         lapInterval = setInterval(startLapTimer, 10);
         btnLock.disabled = false;
+        btnStart.disabled = true;
     })
 
     btnStop.addEventListener("click", () => {
         clearInterval(interval);
         clearInterval(lapInterval);
         btnLock.disabled = true;
+        btnStart.disabled = false;
     })
 
     btnLap.addEventListener("click", () => {
@@ -80,6 +82,7 @@
         newDiv.prepend(node);
         let lapList = document.getElementById('laps');
         lapList.appendChild(newDiv);
+        btnStart.disabled = false;
     })
 
     function startTimer() {

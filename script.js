@@ -1,7 +1,5 @@
     //upgrades 
-    
     //
-    
     var seconds = "00";
     var tens = "00";
     var minutes = "00";
@@ -18,21 +16,38 @@
     var interval; //not sure what this does
     var lapCounter = 0;
     var lapInterval;
+    let stopColor = document.getElementById("stop");
+    let startColor = document.getElementById("start");
+    let arrLap = [];
+    let arrTenList = [];
+    let arrSecList = [];
+    let arrMinList = [];
+    let max = 0;
+    let index = 0;
+    let maxLaps =[];
+
 
     var btnLock = document.getElementById("lap")
     btnLock.disabled = true;
 
     btnStart.addEventListener("click", () => {
         clearInterval(interval);
-        //let clockBG = document.getElementById('time')
-        //clockBG.style.backgroundColor = 'green';
+        stopColor.style.borderColor = 'red';
+        stopColor.style.color = 'red';
+        startColor.style.borderColor = 'black';
+        startColor.style.color = 'black';
         interval = setInterval(startTimer, 10);
         lapInterval = setInterval(startLapTimer, 10);
         btnLock.disabled = false;
         btnStart.disabled = true;
+        btnStop.disabled = false;
     })
 
     btnStop.addEventListener("click", () => {
+        stopColor.style.borderColor = 'black';
+        stopColor.style.color = 'black';
+        startColor.style.borderColor = 'green';
+        startColor.style.color = 'green';
         clearInterval(interval);
         clearInterval(lapInterval);
         btnLock.disabled = true;
@@ -41,24 +56,48 @@
 
     btnLap.addEventListener("click", () => {
         lapCounter++
-        //figure out how to highlight fastest and slowest laps
         
+        let currentLap = lapMinutes + lapSeconds + lapTens;
+        arrLap.push(currentLap)
+
         let newDiv = document.createElement('div');
+        newDiv.setAttribute('id', `lap${lapCounter}`);
+        //newDiv.setAttribute('id', 'clear');
         let node = document.createTextNode(`Lap ${lapCounter} - ${lapMinutes}:${lapSeconds}:${lapTens}`);
         newDiv.prepend(node);
         let lapList = document.getElementById('laps');
         lapList.prepend(newDiv);
         clearInterval(lapInterval);
 
+
         lapTens = "00";
         lapSeconds = "00";
         lapMinutes = "00";
 
-
         lapInterval = setInterval(startLapTimer, 10);
+
+
+        for(let i = 0; i < arrLap.length; i++){
+            if(arrLap[i] > max){
+                max = arrLap[i];
+                index = 'lap'+(i+1);
+                console.log(index);
+                //document.getElementById(`clear`).style.color = 'black';
+                document.getElementById(`${index}`).style.color = 'red';
+                for(let i = 0; i < maxLaps.length; i++){
+                    document.getElementById(`${maxLaps[i]}`).style.color = 'black';
+                }
+                maxLaps.push(index);
+            }
+        }
+
     })
 
     btnReset.addEventListener("click", () => {
+        stopColor.style.borderColor = 'black';
+        stopColor.style.color = 'black';
+        startColor.style.borderColor = 'black';
+        startColor.style.color = 'black';
         clearInterval(interval);  
         clearInterval(lapInterval);
         btnLock.disabled = true;  
@@ -83,6 +122,11 @@
         let lapList = document.getElementById('laps');
         lapList.appendChild(newDiv);
         btnStart.disabled = false;
+        btnStop.disabled = true;
+        index = 0;
+        max = 0;
+        maxLaps = [];
+        arrLap = [];
     })
 
     function startTimer() {
@@ -97,7 +141,6 @@
         }
 
         if(tens > 99){
-            //console.log("seconds");
             seconds++;
             if(seconds < 10){
                 seconds = "0" + seconds;
@@ -108,18 +151,13 @@
             tens = "0" + 0;
             addTens.innerHTML = tens;
         }
-        
-        // if(seconds < 10){
-        //     //seconds = "0" + seconds;
-        //     addSecs.innerHTML = "0" + seconds;
-        // }
+
 
         if (seconds > 9){
             addSecs.innerHTML = seconds;
         }
 
         if(seconds > 59){
-            //console.log("minutes");
             minutes++;
             if(minutes < 10){
                 minutes = "0" + minutes;
@@ -130,11 +168,6 @@
             seconds = "0" + 0;
             addSecs.innerHTML = seconds;
         }
-
-        // if(minutes = 0){
-        //      addMins.innerHTML = "00";
-        // }
-
         if(minutes > 9){
             addMins.innerHTML = minutes;
         }

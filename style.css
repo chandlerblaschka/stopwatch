@@ -11,6 +11,7 @@
 h1 {
     font-size: 35px;
     display: flex;
+    /* text-decoration: underline; */
 }
 
 h2 {
@@ -24,12 +25,15 @@ p {
     justify-content: center;
     align-items: center;
     border: 10px solid black;
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
     /* padding: 25px; */
     border-radius: 50%;
     border-style: double;
     box-shadow: grey 0px 0px 10px;
+    font-size: 25px;
+    background: linear-gradient(45deg, white 50%, lightgrey);
+
 }
 
 body {
@@ -55,10 +59,11 @@ body {
 
 button {
     font-family: sans-serif;
+    font-weight: 525;
     font-size: 16px;
     padding: 10px 20px 10px 20px;
     width: 100px;
-    border-radius: 10px;
+    border-radius: 25px;
     background-color: white;
 }
 
@@ -85,12 +90,31 @@ ul {
 }
 
 #box {
-    padding: 4px;
+    padding: 10px;
     border: 2px solid black;
+    box-shadow: inset 0px 0px 5px grey;
+    background-color: white;
 }
 
 
 /* #start:hover {
-    background-color: rgb(129, 238, 129);
+    background-color: lightgreen;
+}
+
+#start:active {
+    background-color: lightgreen;
 } */
 
+/* #stop:hover {
+    background-color: lightpink;
+}  */
+
+button:disabled, button[disabled], button {
+    border: 2.5px solid black;
+    color: black;
+    font-size: 20px;
+}
+
+button:hover{
+    cursor: pointer;
+}

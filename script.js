@@ -16,41 +16,36 @@
     var interval; //not sure what this does
     var lapCounter = 0;
     var lapInterval;
-    let stopColor = document.getElementById("stop");
-    let startColor = document.getElementById("start");
     let arrLap = [];
-    let arrTenList = [];
-    let arrSecList = [];
-    let arrMinList = [];
     let max = 0;
     let index = 0;
     let maxLaps =[];
+    let min = 10000000000000000000;
+    let minLaps = [];
 
-
-    var btnLock = document.getElementById("lap")
-    btnLock.disabled = true;
+    btnLap.disabled = true;
 
     btnStart.addEventListener("click", () => {
         clearInterval(interval);
-        stopColor.style.borderColor = 'red';
-        stopColor.style.color = 'red';
-        startColor.style.borderColor = 'black';
-        startColor.style.color = 'black';
+        btnStop.style.borderColor = 'red';
+        btnStop.style.color = 'red';
+        btnStart.style.borderColor = 'black';
+        btnStart.style.color = 'black';
         interval = setInterval(startTimer, 10);
         lapInterval = setInterval(startLapTimer, 10);
-        btnLock.disabled = false;
+        btnLap.disabled = false;
         btnStart.disabled = true;
         btnStop.disabled = false;
     })
 
     btnStop.addEventListener("click", () => {
-        stopColor.style.borderColor = 'black';
-        stopColor.style.color = 'black';
-        startColor.style.borderColor = 'green';
-        startColor.style.color = 'green';
+        btnStop.style.borderColor = 'black';
+        btnStop.style.color = 'black';
+        btnStart.style.borderColor = 'green';
+        btnStart.style.color = 'green';
         clearInterval(interval);
         clearInterval(lapInterval);
-        btnLock.disabled = true;
+        btnLap.disabled = true;
         btnStart.disabled = false;
     })
 
@@ -78,29 +73,54 @@
 
 
         for(let i = 0; i < arrLap.length; i++){
-            if(arrLap[i] > max){
+            if(arrLap[i] > max && i > 0){
                 max = arrLap[i];
                 index = 'lap'+(i+1);
-                console.log(index);
-                //document.getElementById(`clear`).style.color = 'black';
                 document.getElementById(`${index}`).style.color = 'red';
                 for(let i = 0; i < maxLaps.length; i++){
                     document.getElementById(`${maxLaps[i]}`).style.color = 'black';
                 }
                 maxLaps.push(index);
             }
+
+            if (arrLap[i] < max && arrLap[i] < min){
+                min = arrLap[i];
+                index = 'lap'+(i+1);
+                document.getElementById(`${index}`).style.color = 'green';
+                for(let i = 0; i < minLaps.length; i++){
+                    document.getElementById(`${minLaps[i]}`).style.color = 'black';
+                }
+                minLaps.push(index);
+                console.log(min)
+            }
+
+            if(arrLap[0] >= max){
+                max = arrLap[0];
+                index = 'lap'+(0+1);
+                document.getElementById(`${index}`).style.color = 'red';
+                maxLaps.push(index);
+            }
+
+            if(arrLap[0] <= min){
+                min = arrLap[0];
+                index = 'lap'+(0+1);
+                document.getElementById(`${index}`).style.color = 'green';
+                minLaps.push(index);
+                console.log(min)
+            }
+            
         }
 
     })
 
     btnReset.addEventListener("click", () => {
-        stopColor.style.borderColor = 'black';
-        stopColor.style.color = 'black';
-        startColor.style.borderColor = 'black';
-        startColor.style.color = 'black';
+        btnStop.style.borderColor = 'black';
+        btnStop.style.color = 'black';
+        btnStart.style.borderColor = 'black';
+        btnStart.style.color = 'black';
         clearInterval(interval);  
         clearInterval(lapInterval);
-        btnLock.disabled = true;  
+        btnLap.disabled = true;  
         tens = "00";
         seconds = "00";
         minutes = "00";
@@ -127,6 +147,8 @@
         max = 0;
         maxLaps = [];
         arrLap = [];
+        min = 10000000000000000000;
+        minLaps = [];
     })
 
     function startTimer() {

@@ -10,9 +10,7 @@
     var addSecs = document.getElementById("sec");
     var addMins = document.getElementById("mins");
     var btnStart = document.getElementById("start");
-    // var btnStop = document.getElementById("stop");
     var btnReset = document.getElementById("reset");
-    // var btnLap = document.getElementById("lap");
     var interval; //not sure what this does
     var lapCounter = 0;
     var lapInterval;
@@ -24,11 +22,12 @@
     let minLaps = [];
     let clickCount = 0;
 
-    //btnLap.disabled = true;
+    btnReset.disabled = true;
 
     btnStart.addEventListener('click', () => {
         clickCount++
         console.log(clickCount)
+        btnReset.disabled = false;
         if(clickCount % 2 === 0){
             clearInterval(interval);
             clearInterval(lapInterval)
@@ -45,49 +44,15 @@
             btnStart.textContent = 'stop'
             btnReset.textContent = 'lap'
         }
-        
     })
-
-
-    // btnStart.addEventListener("click", () => {
-    //     clearInterval(interval);
-    //     btnStop.style.borderColor = 'red';
-    //     btnStop.style.color = 'red';
-    //     btnStart.style.borderColor = 'black';
-    //     btnStart.style.color = 'black';
-    //     interval = setInterval(startTimer, 10);
-    //     lapInterval = setInterval(startLapTimer, 10);
-    //     btnLap.disabled = false;
-    //     btnStart.disabled = true;
-    //     btnStop.disabled = false;
-    // })
-
-    // btnStop.addEventListener("click", () => {
-    //     btnStop.style.borderColor = 'black';
-    //     btnStop.style.color = 'black';
-    //     btnStart.style.borderColor = 'green';
-    //     btnStart.style.color = 'green';
-    //     clearInterval(interval);
-    //     clearInterval(lapInterval);
-    //     btnLap.disabled = true;
-    //     btnStart.disabled = false;
-    // })
-
-    // btnLap.addEventListener("click", () => {
-        
-    // })
 
     btnReset.addEventListener("click", () => {
         if(clickCount % 2 === 0){
-        btnReset.textContent = 'reset'
-        //console.log(clickCount)
-        // btnStop.style.borderColor = 'black';
-        // btnStop.style.color = 'black';
+        btnReset.textContent = 'lap'
         btnStart.style.borderColor = 'black';
         btnStart.style.color = 'black';
         clearInterval(interval);  
         clearInterval(lapInterval);
-        //btnLap.disabled = true;  
         tens = "00";
         seconds = "00";
         minutes = "00";
@@ -108,8 +73,6 @@
         newDiv.prepend(node);
         let lapList = document.getElementById('laps');
         lapList.appendChild(newDiv);
-        // btnStart.disabled = false;
-        // btnStop.disabled = true;
         index = 0;
         max = 0;
         maxLaps = [];
@@ -124,7 +87,6 @@
         arrLap.push(currentLap)
         let newDiv = document.createElement('div');
         newDiv.setAttribute('id', `lap${lapCounter}`);
-        //newDiv.setAttribute('id', 'clear');
         let node = document.createTextNode(`Lap ${lapCounter} - ${lapMinutes}:${lapSeconds}:${lapTens}`);
         newDiv.prepend(node);
         let lapList = document.getElementById('laps');

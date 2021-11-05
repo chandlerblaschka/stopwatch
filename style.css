@@ -19,18 +19,43 @@ h2 {
     display: flex;
     margin: 0;
 }
+#lapCircle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid black;
+    width: 215px;
+    height: 215px;
+    border-radius: 50%;
+    background:  conic-gradient(black 0deg,black 1deg, white 1deg, white 360deg, black 360deg);
+    /* background-color: yellow; */
+}
+#bgCircle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid black;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    /* border-style: double; */
+    box-shadow: grey 0px 0px 10px;
+    margin: 25px;
+    background:  conic-gradient(black 0deg,black 1deg, white 1deg, white 360deg, black 360deg);
+    /* background-color: green; */
+}
 
 p {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 10px solid black;
-    width: 200px;
-    height: 200px;
+    border: 5px solid black;
+    width: 195px;
+    height: 195px;
     /* padding: 25px; */
     border-radius: 50%;
-    border-style: double;
-    box-shadow: grey 0px 0px 10px;
+    /* border-style: double; */
+    /* box-shadow: grey 0px 0px 10px; */
     font-size: 25px;
     background: linear-gradient(45deg, white 50%, lightgrey);
 

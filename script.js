@@ -1,5 +1,7 @@
     //upgrades 
     //
+    let lapCount = 0;
+    let timeCount = 0;
     var seconds = "00";
     var tens = "00";
     var minutes = "00";
@@ -11,6 +13,9 @@
     var addMins = document.getElementById("mins");
     var btnStart = document.getElementById("start");
     var btnReset = document.getElementById("reset");
+    let lapTicker = document.getElementById('lapCircle');
+    let ticker = document.getElementById('bgCircle');
+    
     var interval; //not sure what this does
     var lapCounter = 0;
     var lapInterval;
@@ -26,7 +31,6 @@
 
     btnStart.addEventListener('click', () => {
         clickCount++
-        console.log(clickCount)
         btnReset.disabled = false;
         if(clickCount % 2 === 0){
             clearInterval(interval);
@@ -35,6 +39,9 @@
             btnStart.style.borderColor = 'green'
             btnStart.textContent = 'start'
             btnReset.textContent = 'reset'
+            //let tickRotation = (timeCount/6000)*360
+            //ticker.style.background = `conic-gradient(red 0deg, red ${tickRotation}deg, white ${tickRotation}deg)`
+
         } else {
             clearInterval(interval);
             interval = setInterval(startTimer, 10);
@@ -43,6 +50,7 @@
             btnStart.style.borderColor = 'red'
             btnStart.textContent = 'stop'
             btnReset.textContent = 'lap'
+
         }
     })
 
@@ -80,7 +88,16 @@
         min = 10000000000000000000;
         minLaps = [];
         clickCount = 0;
+        timeCount = 0
+        lapCount = 0
+        let tickRotation = (timeCount/6000)*360
+        let marker = tickRotation + 1;
+        ticker.style.background = `conic-gradient(black 0deg, black 1deg, green 1deg, green ${tickRotation}deg, black ${tickRotation}deg, black ${marker}deg, white ${marker}deg, white 360deg, black 360deg)`        
+        let lapTickRotation = (timeCount/6000)*360
+        let lapMarker = lapTickRotation + 1;
+        lapTicker.style.background = `conic-gradient(black 0deg, black 1deg, orange 1deg, orange ${lapTickRotation}deg, black ${lapTickRotation}deg, black ${lapMarker}deg, white ${lapMarker}deg, white 360deg, black 360deg)`        
         } else {
+        lapCount = 0
         btnReset.textContent = 'lap'
         lapCounter++
         let currentLap = lapMinutes + lapSeconds + lapTens;
@@ -131,12 +148,23 @@
             }
         }
         }
-
         
     })
 
     function startTimer() {
         tens++;
+        timeCount++;
+        if (timeCount > 5999){
+            timeCount = 0
+            let tickRotation = (timeCount/6000)*360
+            let marker = tickRotation + 1;
+            ticker.style.background = `conic-gradient(black 0deg, black 1deg, green 1deg, green ${tickRotation}deg, black ${tickRotation}deg, black ${marker}deg, white ${marker}deg, white 360deg, black 360deg)`
+        } else {
+            let tickRotation = (timeCount/6000)*360
+            let marker = tickRotation + 1;
+            ticker.style.background = `conic-gradient(black 0deg, black 1deg, green 1deg, green ${tickRotation}deg, black ${tickRotation}deg, black ${marker}deg, white ${marker}deg, white 360deg, black 360deg)`
+        }
+        
         if(tens <= 9){
             tens = "0" + tens;
             addTens.innerHTML = tens;
@@ -181,6 +209,20 @@
 
     function startLapTimer() {
         lapTens++;
+        lapCount++;
+        if (lapCount > 5999){
+            lapCount = 0
+            let lapTickRotation = (lapCount/6000)*360
+            let lapMarker = lapTickRotation + 1;
+            //console.log(lapMarker)
+            lapTicker.style.background = `conic-gradient(black 0deg, black 1deg, orange 1deg, orange ${lapTickRotation}deg, black ${lapTickRotation}deg, black ${lapMarker}deg, white ${lapMarker}deg, white 360deg, black 360deg)`
+        } else {
+            let lapTickRotation = (lapCount/6000)*360
+            let lapMarker = lapTickRotation + 1;
+            //console.log(lapMarker)
+            lapTicker.style.background = `conic-gradient(black 0deg, black 1deg, orange 1deg, orange ${lapTickRotation}deg, black ${lapTickRotation}deg, black ${lapMarker}deg, white ${lapMarker}deg, white 360deg, black 360deg)`
+        }
+
         if(lapTens <= 9){
             lapTens = "0" + lapTens;
             lapTens = lapTens;

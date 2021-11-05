@@ -39,8 +39,9 @@
             btnStart.style.borderColor = 'green'
             btnStart.textContent = 'start'
             btnReset.textContent = 'reset'
-            //let tickRotation = (timeCount/6000)*360
-            //ticker.style.background = `conic-gradient(red 0deg, red ${tickRotation}deg, white ${tickRotation}deg)`
+            let tickRotation = (timeCount/6000)*360
+            let marker = tickRotation + 1
+            ticker.style.background = `conic-gradient(black 0deg, black 1deg, red 1deg, red ${tickRotation}deg, black ${tickRotation}deg, black ${marker}deg, white ${marker}deg, white 360deg, black 360deg)`
 
         } else {
             clearInterval(interval);
